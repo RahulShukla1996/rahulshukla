@@ -1,0 +1,78 @@
+page  = content of the web page
+start_link = page.find('<a href=') # return position of first occurence of '<a href='
+start_quote = page.find('"',start_quote)
+end_quote  = page.find('"',start_quote+1)
+url  = page[start_quote+1 : end_quote]
+
+Procedure
+def get_next_target(page):
+    start_link = page.find('<a href=')
+    start_quote = page.find('"',start_link)
+    end_quote = page.find('"',start_quote+1)
+    url = s[start_quote+1:end_quote]
+    return url, end_quote
+
+crawling process
+
+start with tocrawl = [seed]
+crawled = []
+while more pages tocrawl
+      pick page from tocrawl
+      add that page to crawled
+      add all the links targets on 
+      this page to tocawl
+return crawled      
+
+adding keyword to index
+
+def add_to_index(index,url,keyword):
+    for entry in index:
+        if index[0] == keyword:
+           if url not in entry[1]:
+              index[1].append(url)
+        return
+    index.append([[keyword]],[url])
+
+lookup procedure
+
+def lookup(index,word):
+    for entry in index:
+        if entry[0] == word:
+           return entry[1]
+    return []
+
+adding pages to the index
+
+def add_pages_to_index(index,url,content):
+    words = content.split()
+    for word in words:
+        add_to__index(index,url,word)
+
+procedure get_page
+
+def get_apge(url):
+    try:
+        import urllib
+        return urllib.urlopen(url).read()
+    except:
+           return "error"
+
+
+recording the countof url
+
+def add_to_index(index,keyword,url):
+    for entry in index:
+        if entry[0] == keyword:
+           for element in entry[1]:
+               if element[0]== url:
+                  return
+           entry[1].append([url,0])
+           return
+    index.append([keyword,[[url,0]]])
+
+def record_user_click(index,keyword,url):
+    urls = lookup(index,keyword)
+    if urls:
+       for entry in urls:
+           if entry[0] == url:
+              entry[1] = entry[1] + 1
